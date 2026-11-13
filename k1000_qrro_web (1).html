@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="K1000 QRRO Technology & Software desarrolla soluciones de trazabilidad, gestión logística y control de accesos inteligente.">
+  <title>K1000 QRRO® | Technology & Software</title>
+  <style>
+    :root {
+      --navy: #0b1830;
+      --navy-2: #122746;
+      --blue: #2563eb;
+      --cyan: #35c6d4;
+      --ink: #17243a;
+      --muted: #64748b;
+      --line: #e5ebf3;
+      --soft: #f4f7fb;
+      --white: #fff;
+      --radius: 22px;
+      --shadow: 0 18px 50px rgba(10, 29, 57, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--ink); background: var(--white);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, calc(100% - 44px)); margin: auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.92);
+      backdrop-filter: blur(14px); border-bottom: 1px solid rgba(229,235,243,.9);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 850; letter-spacing: -.04em; color: var(--navy); }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center;
+      color: white; font-size: 15px; font-weight: 900; letter-spacing: -.08em;
+      background: linear-gradient(135deg, var(--blue), var(--cyan)); box-shadow: 0 7px 18px rgba(37,99,235,.25);
+    }
+    .brand-name { font-size: 17px; line-height: 1.05; }
+    .brand-name small { display: block; margin-top: 5px; font-size: 9px; letter-spacing: .19em; color: var(--muted); font-weight: 750; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #475569; font-size: 13px; font-weight: 650; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta, .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      border-radius: 999px; padding: 12px 19px; font-size: 13px; font-weight: 750;
+      background: var(--blue); color: white; border: 1px solid var(--blue);
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .nav-cta:hover, .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(37,99,235,.22); }
+    .menu-btn { display: none; border: 0; background: transparent; color: var(--navy); font-size: 25px; }
+    .hero {
+      overflow: hidden; position: relative; color: white;
+      background: radial-gradient(circle at 80% 20%, rgba(53,198,212,.24), transparent 30%),
+                  radial-gradient(circle at 10% 90%, rgba(37,99,235,.22), transparent 34%),
+                  linear-gradient(125deg, #09162b 0%, #102746 62%, #0b2540 100%);
+    }
+    .hero:after {
+      content: ""; position: absolute; width: 520px; height: 520px; border: 1px solid rgba(255,255,255,.09);
+      border-radius: 50%; right: -180px; top: -190px; box-shadow: 0 0 0 55px rgba(255,255,255,.025), 0 0 0 110px rgba(255,255,255,.02);
+    }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; gap: 60px; align-items: center; padding: 92px 0 100px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #a8edf0; text-transform: uppercase; letter-spacing: .16em; font-size: 10px; font-weight: 850; }
+    .eyebrow:before { content: ""; width: 24px; height: 2px; background: var(--cyan); }
+    h1 { font-size: clamp(42px, 5.3vw, 67px); line-height: 1.04; letter-spacing: -.055em; margin: 20px 0; max-width: 650px; }
+    h1 span { color: #59d5df; }
+    .hero-copy { max-width: 570px; color: #c4d2e3; font-size: 16px; margin: 0 0 30px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn-light { background: white; border-color: white; color: var(--navy); }
+    .btn-outline { background: transparent; border-color: rgba(255,255,255,.32); color: white; }
+    .hero-note { margin-top: 34px; color: #a9bbd0; font-size: 11px; letter-spacing: .04em; }
+    .visual-card {
+      min-height: 350px; border: 1px solid rgba(255,255,255,.16); border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035));
+      box-shadow: 0 30px 80px rgba(0,0,0,.25); padding: 25px; position: relative;
+    }
+    .visual-top { display: flex; justify-content: space-between; color: #c5d6e8; font-size: 11px; }
+    .status { color: #8de7c2; display: flex; align-items: center; gap: 7px; }
+    .status:before { content:""; width:7px;height:7px;border-radius:50%;background:#55d6a5; box-shadow:0 0 0 5px rgba(85,214,165,.12); }
+    .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    .dash-tile { background: rgba(6,18,37,.48); border: 1px solid rgba(255,255,255,.09); border-radius: 16px; padding: 17px; min-height: 112px; }
+    .dash-tile small { color: #9fb2c9; font-size: 10px; }
+    .dash-tile strong { display: block; color: white; font-size: 25px; margin-top: 9px; letter-spacing: -.04em; }
+    .dash-tile span { color: #70dce2; font-size: 10px; }
+    .qr-row { display: flex; align-items: center; gap: 15px; margin-top: 15px; }
+    .qr {
+      width: 75px; height: 75px; flex: 0 0 75px; border-radius: 10px; background: white; padding: 8px;
+      display: grid; grid-template-columns: repeat(7,1fr); grid-template-rows: repeat(7,1fr); gap: 2px;
+    }
+    .qr i { background: #102746; border-radius: 1px; }
+    .qr i:nth-child(3n), .qr i:nth-child(4n+1), .qr i:nth-child(11), .qr i:nth-child(19), .qr i:nth-child(32), .qr i:nth-child(42) { background: transparent; }
+    .qr-copy b { display: block; color: white; font-size: 13px; }
+    .qr-copy small { color: #a9bbd0; font-size: 10px; }
+    section { padding: 86px 0; }
+    .section-head { max-width: 650px; margin-bottom: 38px; }
+    .kicker { color: var(--blue); font-size: 10px; font-weight: 850; text-transform: uppercase; letter-spacing: .17em; }
+    h2 { color: var(--navy); font-size: clamp(30px, 3.4vw, 43px); line-height: 1.12; letter-spacing: -.045em; margin: 12px 0 14px; }
+    .section-head p { color: var(--muted); font-size: 15px; margin: 0; }
+    .services { background: var(--soft); }
+    .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .service-card {
+      border-radius: var(--radius); background: white; border: 1px solid var(--line); padding: 30px;
+      box-shadow: 0 8px 28px rgba(15,35,65,.035); transition: transform .2s, box-shadow .2s;
+    }
+    .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .service-icon {
+      width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px;
+      background: #eaf2ff; color: var(--blue); font-size: 24px; margin-bottom: 22px;
+    }
+    .service-card:nth-child(2) .service-icon { background: #e5f9f8; color: #0891a0; }
+    .service-card h3 { color: var(--navy); font-size: 23px; letter-spacing: -.035em; margin: 0 0 10px; }
+    .service-card p { color: var(--muted); font-size: 14px; margin: 0 0 19px; }
+    .feature-list { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 10px; }
+    .feature-list li { color: #334155; font-size: 13px; display: flex; gap: 10px; align-items: flex-start; }
+    .feature-list li:before { content: "✓"; color: var(--blue); font-weight: 900; }
+    .service-link { color: var(--blue); font-size: 12px; font-weight: 800; }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; }
+    .about-panel {
+      min-height: 330px; border-radius: 26px; padding: 30px; color: white; position: relative; overflow: hidden;
+      background: linear-gradient(145deg, #102746, #0c1b32);
+    }
+    .about-panel:before { content:"K"; position:absolute; right:-10px; bottom:-115px; font-size:360px; font-weight:900; line-height:1; color:rgba(255,255,255,.045); }
+    .about-panel .mini-label { color:#73dce2; font-size:10px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; }
+    .about-panel h3 { position:relative; max-width:290px; font-size:30px; line-height:1.13; letter-spacing:-.04em; margin:15px 0; }
+    .about-panel p { position:relative; max-width:300px; color:#b9c9dc; font-size:13px; }
+    .about-copy p { color: var(--muted); font-size:15px; }
+    .pill-row { display:flex; flex-wrap:wrap; gap:9px; margin-top:24px; }
+    .pill { background:#eff5ff; color:#2455a7; padding:8px 12px; border-radius:999px; font-size:11px; font-weight:750; }
+    .steps { background: var(--soft); }
+    .step-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .step { padding:25px; border:1px solid var(--line); border-radius:18px; background:white; }
+    .step-num { color:var(--blue); font-size:11px; font-weight:900; letter-spacing:.12em; }
+    .step h3 { margin:12px 0 7px; color:var(--navy); font-size:17px; }
+    .step p { margin:0; color:var(--muted); font-size:13px; }
+    .contact { padding: 75px 0; }
+    .contact-box {
+      display:flex; align-items:center; justify-content:space-between; gap:30px; padding:42px;
+      border-radius:26px; color:white; background:linear-gradient(110deg,#0b1830,#15375b);
+    }
+    .contact-box h2 { color:white; max-width:570px; margin-top:8px; }
+    .contact-box p { color:#bdcce0; margin:0; font-size:14px; }
+    .contact-box .btn { white-space:nowrap; background:white; color:var(--navy); border-color:white; }
+    footer { background:#081426; color:#aab9cc; padding:30px 0; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .footer-brand { color:white; font-size:13px; font-weight:850; }
+    footer small { font-size:10px; }
+    .mobile-menu { display:none; }
+    @media (max-width: 800px) {
+      .nav-links, .nav-cta { display:none; }
+      .menu-btn { display:block; }
+      .mobile-menu { padding:0 0 18px; display:none; }
+      .mobile-menu.open { display:grid; gap:12px; }
+      .mobile-menu a { color:#475569; font-size:14px; font-weight:700; }
+      .hero-grid, .about-grid { grid-template-columns:1fr; gap:35px; }
+      .hero-grid { padding:70px 0; }
+      .visual-card { max-width:520px; width:100%; }
+      .about-grid { gap:30px; }
+      .service-grid { grid-template-columns:1fr; }
+      .step-grid { grid-template-columns:1fr; }
+      .contact-box { align-items:flex-start; flex-direction:column; padding:30px; }
+    }
+    @media (max-width: 480px) {
+      .container { width:min(100% - 30px, 1120px); }
+      .hero-grid { padding:58px 0; }
+      .visual-card { padding:18px; min-height:0; }
+      .dashboard { gap:8px; }
+      .dash-tile { padding:12px; min-height:95px; }
+      .dash-tile strong { font-size:21px; }
+      section { padding:65px 0; }
+      .service-card { padding:23px; }
+      .footer-inner { align-items:flex-start; flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav" aria-label="Navegación principal">
+        <a class="brand" href="#inicio" aria-label="K1000 QRRO inicio">
+          <span class="brand-mark">KQ</span>
+          <span class="brand-name">K1000 QRRO®<small>TECHNOLOGY & SOFTWARE</small></span>
+        </a>
+        <div class="nav-links">
+          <a href="#servicios">Servicios</a>
+          <a href="#empresa">La empresa</a>
+          <a href="#metodo">Cómo trabajamos</a>
+        </div>
+        <a class="nav-cta" href="#contacto">Conócenos <span>↗</span></a>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      </nav>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#servicios">Servicios</a><a href="#empresa">La empresa</a><a href="#metodo">Cómo trabajamos</a><a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Tecnología para empresas</div>
+          <h1>Conectamos tus activos. <span>Impulsamos tu operación.</span></h1>
+          <p class="hero-copy">Desarrollamos soluciones de trazabilidad e inteligencia operativa para ayudar a las empresas a identificar, gestionar y controlar sus activos mediante tecnología inteligente.</p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="#servicios">Descubrir soluciones <span>→</span></a>
+            <a class="btn btn-outline" href="#empresa">Conocer K1000 QRRO</a>
+          </div>
+          <div class="hero-note">K1000 QRRO® — Technology & Software</div>
+        </div>
+        <div class="visual-card" aria-label="Ilustración conceptual de un panel de gestión">
+          <div class="visual-top"><span>PANEL DE CONTROL · DEMOSTRACIÓN CONCEPTUAL</span><span class="status">Sistema conectado</span></div>
+          <div class="dashboard">
+            <div class="dash-tile"><small>Gestión de activos</small><strong>QRRO</strong><span>Identificación inteligente</span></div>
+            <div class="dash-tile"><small>Procesamiento</small><strong>K1000</strong><span>Información centralizada</span></div>
+          </div>
+          <div class="qr-row">
+            <div class="qr" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="qr-copy"><b>Un código. Más control.</b><small>Conectamos información, personas y procesos.</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Nuestras soluciones</div>
+          <h2>Servicios diseñados para una gestión más inteligente.</h2>
+          <p>Desarrollamos herramientas digitales que conectan los procesos de tu empresa y facilitan el control de la información.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">▦</div>
+            <h3>QRRO Logistics</h3>
+            <p class="service-link">by K1000 · Gestión inteligente de almacenes</p>
+            <p>Un sistema de gestión de almacenes en el que cada palé o producto cuenta con un código QR inteligente. Los operarios pueden escanearlo para registrar movimientos y consultar información del inventario.</p>
+            <ul class="feature-list">
+              <li>Identificación de productos mediante códigos QR.</li>
+              <li>Registro y seguimiento de inventario.</li>
+              <li>Procesamiento de información en la nube.</li>
+              <li>Consulta y actualización de datos en tiempo real, según la solución implantada.</li>
+            </ul>
+            <a class="service-link" href="#contacto">Solicitar información →</a>
+          </article>
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">⌁</div>
+            <h3>QRRO Access</h3>
+            <p class="service-link">by K1000 · Control inteligente de accesos</p>
+            <p>Software de alta seguridad para el control de personal y eventos, diseñado para validar accesos de forma rápida y segura mediante procesos de verificación encriptados.</p>
+            <ul class="feature-list">
+              <li>Control de acceso de personal y asistentes.</li>
+              <li>Validación de entradas mediante tecnología digital.</li>
+              <li>Procesamiento de validaciones de alto volumen.</li>
+              <li>Verificación de datos mediante sistemas encriptados.</li>
+            </ul>
+            <a class="service-link" href="#contacto">Solicitar información →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="empresa">
+      <div class="container about-grid">
+        <div class="about-panel">
+          <div class="mini-label">Quiénes somos</div>
+          <h3>Tecnología que conecta cada parte de tu negocio.</h3>
+          <p>Soluciones digitales para organizar, identificar y gestionar activos y accesos.</p>
+        </div>
+        <div class="about-copy">
+          <div class="kicker">K1000 QRRO® Technology & Software</div>
+          <h2>Inteligencia operativa para empresas.</h2>
+          <p>K1000 QRRO® es una empresa tecnológica enfocada en el desarrollo de software de trazabilidad e inteligencia operativa.</p>
+          <p>Nuestra propuesta consiste en ayudar a otras compañías a conectar y controlar miles de activos mediante tecnología de escaneo inteligente y movilidad.</p>
+          <div class="pill-row">
+            <span class="pill">Trazabilidad</span><span class="pill">Códigos QR</span><span class="pill">Gestión digital</span><span class="pill">Control de accesos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps" id="metodo">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Nuestra propuesta</div>
+          <h2>De la identificación al control.</h2>
+          <p>Un enfoque sencillo para integrar información y facilitar las operaciones de cada organización.</p>
+        </div>
+        <div class="step-grid">
+          <article class="step"><div class="step-num">01 / IDENTIFICAR</div><h3>Conectamos los activos</h3><p>Asignamos una identidad digital a productos, palés o accesos mediante tecnologías de identificación.</p></article>
+          <article class="step"><div class="step-num">02 / REGISTRAR</div><h3>Capturamos la información</h3><p>Los datos se registran mediante procesos de escaneo y validación adaptados a cada solución.</p></article>
+          <article class="step"><div class="step-num">03 / GESTIONAR</div><h3>Facilitamos el control</h3><p>La información centralizada ayuda a consultar movimientos, inventarios y validaciones.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <div class="eyebrow">Hablemos de tu proyecto</div>
+            <h2>¿Tu empresa está preparada para dar el siguiente paso?</h2>
+            <p>Cuéntanos qué necesitas y descubre qué solución de K1000 QRRO® puede encajar con tu organización.</p>
+          </div>
+          <a class="btn" href="mailto:?subject=Consulta%20sobre%20K1000%20QRRO">Solicitar información <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div><div class="footer-brand">K1000 QRRO® — Technology & Software</div><small>Desarrollo de Software de Trazabilidad e Inteligencia Operativa.</small></div>
+      <small>© 2026 K1000 QRRO®. Todos los derechos reservados.</small>
+    </div>
+  </footer>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.textContent = open ? '×' : '☰';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }));
+  </script>
+</body>
+</html>
